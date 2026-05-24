@@ -30,7 +30,7 @@ class Produto:
         self.nome = nome                # Nome do produto
         self.categoria = categoria      # Categoria (Liquida, Mercearia, Lacticinios etc.)
         self.preco = float(preco)       # Preço em reais (float)
-        self.quantidade = int(quantidade) # Quantidade em estoque (int)
+        self.quantidade = float(quantidade) # Quantidade em estoque (float para permitir frações, ex: 0.5 kg)
         self.descricao = descricao      # Descrição opcional
 
     # -----------------------------------------------------------
