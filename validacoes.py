@@ -37,17 +37,14 @@ def validar_preco(preco_texto):
     if not preco_texto:
         return False, "O preço não pode ser vazio."
 
-    
+    try:
         preco = float(preco_texto)
     except ValueError:
-       
-    return False, "O preço deve ser um número válido (ex: 29.90)."
+        return False, "O preço deve ser um número válido (ex: 29.90)."
 
-   
     if preco <= 0:
         return False, "O preço deve ser maior que zero."
 
-  
     return True, preco
 
 
