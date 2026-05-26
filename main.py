@@ -303,7 +303,7 @@ class AplicacaoCadastro(tk.Tk):
         # Treeview é o widget de tabela do Tkinter
         self.tabela = ttk.Treeview(
             frame_tree,
-            columns=colunas,
+            columns=colunas,    
             show="headings",   # "headings" esconde a coluna vazia padrão
             height=18          # Número de linhas visíveis
         )

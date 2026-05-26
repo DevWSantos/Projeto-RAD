@@ -134,7 +134,7 @@ def buscar_produtos_por_nome(texto):
 # ===============================================================
 def atualizar_produto(id, nome, categoria, preco, quantidade, descricao=""):
     try:
-        conexao = conectar()
+        conexao = conectar() 
         cursor = conexao.cursor()
 
         
