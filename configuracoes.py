@@ -50,16 +50,16 @@ def salvar_configuracoes(configs):
 #            dicionário. Se o arquivo não existir, usa o padrão.
 # ===============================================================
 def carregar_configuracoes():
-    # Verificamos se o arquivo de config já existe
+    # Verifica se o arquivo de config já existe
     if not os.path.exists(ARQUIVO_CONFIG):
         # Se não existe, salvamos as configurações padrão e as retornamos
         salvar_configuracoes(CONFIGURACOES_PADRAO)
         return CONFIGURACOES_PADRAO.copy()  # .copy() evita modificar o original
 
-    # Criamos um dicionário vazio para armazenar o que vamos ler
+    # Criei um dicionário vazio para armazenar o que vamos ler
     configs = {}
 
-    # Abrimos o arquivo em modo leitura ('r')
+    # Abri o arquivo em modo leitura ('r')
     with open(ARQUIVO_CONFIG, "r", encoding="utf-8") as arquivo:
         # Lemos todas as linhas de uma vez
         for linha in arquivo.readlines():
