@@ -32,7 +32,8 @@ class AplicacaoCadastro(tk.Tk):
     # -----------------------------------------------------------
     def __init__(self):
         
-        self.api = APIService(url_base="http://127.0.0.1:5000/api")
+        #self.api = APIService(url_base="http://127.0.0.1:5000/api")
+        self.api = APIService(url_base="https://rad-python.onrender.com/api")
 
         
         
