@@ -1,0 +1,4 @@
+nome_sistema=Sistema de Cadastro de Produtos
+versao=3.1
+tema=claro
+max_produtos=1000
