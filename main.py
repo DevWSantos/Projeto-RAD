@@ -15,6 +15,8 @@ import banco_de_dados as bd                 # Módulo do SQLite
 import validacoes as val                    # Módulo de validações
 import configuracoes as cfg                 # Módulo de configurações (arquivo TXT)
 from modelo_produto import Produto          # Classe Produto (POO)
+from services.api_service import APIService
+
 
 
 # =============================================================
@@ -23,13 +25,17 @@ from modelo_produto import Produto          # Classe Produto (POO)
 # Tudo da interface fica organizado dentro desta classe
 # =============================================================
 class AplicacaoCadastro(tk.Tk):
-
     # -----------------------------------------------------------
     # CONSTRUTOR: __init__
     # Chamado automaticamente ao criar a aplicação
     # Configura a janela, carrega dados e monta a interface
     # -----------------------------------------------------------
     def __init__(self):
+        
+        self.api = APIService(url_base="http://127.0.0.1:5000/api")
+
+        
+        
         # Chamamos o construtor da classe pai (tk.Tk)
         # Isso inicializa a janela principal do Tkinter
         super().__init__()
@@ -92,7 +98,7 @@ class AplicacaoCadastro(tk.Tk):
         # Versão do sistema no canto direito do cabeçalho
         tk.Label(
             frame_topo,
-            text=f"v{self.configs.get('versao', '1.0')}",
+            text=f"v{self.configs.get('versao', '2.1')}",
             font=("Helvetica", 10),
             bg="#2c3e50",
             fg="#bdc3c7"
@@ -402,6 +408,9 @@ class AplicacaoCadastro(tk.Tk):
                 dados["preco"], dados["quantidade"], dados["descricao"]
             )
             mensagem = "Produto cadastrado com sucesso!"
+            acao_api = "cadastro"
+            textoDisplay = "Cadastrado com sucesso"
+       
         else:
             # Temos um ID = atualização de produto existente
             sucesso = bd.atualizar_produto(
@@ -410,12 +419,19 @@ class AplicacaoCadastro(tk.Tk):
                 dados["preco"], dados["quantidade"], dados["descricao"]
             )
             mensagem = "Produto atualizado com sucesso!"
+            acao_api = "atualizacao"
+            textoDisplay = "Atualizado com sucesso"
+           
 
         if sucesso:
-            # showinfo → caixa de diálogo de informação (verde/azul)
+            # showinfo → caixa de diálogo de informação (verde/azul)True
             messagebox.showinfo("Sucesso", mensagem)
             self.limpar_formulario()   # Limpa o formulário após salvar
             self.atualizar_tabela()    # Recarrega a tabela
+            
+            # CHAMADA DA CLASSE DE API EM UMA LINHA ↓↓↓↓
+            self.api.notificar_assincrono(acao=acao_api, nome_produto=dados["nome"], texto_display=textoDisplay)
+            
         else:
             messagebox.showerror("Erro", "Não foi possível salvar o produto.")
 
@@ -586,7 +602,8 @@ class AplicacaoCadastro(tk.Tk):
         # Só excluímos se o usuário confirmou
         if confirmar:
             sucesso = bd.deletar_produto(produto_id)
-
+            self.api.notificar_assincrono(acao="delecao", nome_produto=nome_produto, texto_display="Excluido com sucesso")
+            
             if sucesso:
                 messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")
                 self.limpar_formulario()
