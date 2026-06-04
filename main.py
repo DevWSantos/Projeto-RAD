@@ -98,7 +98,7 @@ class AplicacaoCadastro(tk.Tk):
         # Versão do sistema no canto direito do cabeçalho
         tk.Label(
             frame_topo,
-            text=f"v{self.configs.get('versao', '2.1')}",
+            text=f"v{'3.1'}",
             font=("Helvetica", 10),
             bg="#2c3e50",
             fg="#bdc3c7"
@@ -602,7 +602,7 @@ class AplicacaoCadastro(tk.Tk):
         # Só excluímos se o usuário confirmou
         if confirmar:
             sucesso = bd.deletar_produto(produto_id)
-            self.api.notificar_assincrono(acao="delecao", nome_produto=nome_produto, texto_display="Excluido com sucesso")
+            self.api.notificar_assincrono(acao="deletar", nome_produto=nome_produto, texto_display="Excluido com sucesso")
             
             if sucesso:
                 messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")

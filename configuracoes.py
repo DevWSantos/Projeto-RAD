@@ -19,7 +19,7 @@ ARQUIVO_CONFIG = "config.txt"
 # ---------------------------------------------------------------
 CONFIGURACOES_PADRAO = {
     "nome_sistema": "Sistema de Cadastro de Produtos",
-    "versao": "1.0",
+    "versao": "3.1",
     "tema": "claro",
     "max_produtos": "1000"
 }
